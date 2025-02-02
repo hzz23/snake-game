@@ -1,9 +1,12 @@
-class Food:
-    def __init__(self, width, height):
-        self.position = self.spawn(width, height)
+import pygame
+import random
 
-    def spawn(self, width, height):
-        import random
-        x = random.randint(0, (width // 10) - 1) * 10
-        y = random.randint(0, (height // 10) - 1) * 10
-        return (x, y)
+class Food:
+    def __init__(self):
+        self.position = (random.randint(0, 59) * 10, random.randint(0, 39) * 10)
+
+    def reposition(self):
+        self.position = (random.randint(0, 59) * 10, random.randint(0, 39) * 10)
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, (255, 0, 0), (*self.position, 10, 10))
