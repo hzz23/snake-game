@@ -1,8 +1,7 @@
-def draw_text(surface, text, position, font, color):
-    text_surface = font.render(text, True, color)
-    surface.blit(text_surface, position)
+from enum import Enum
 
-def load_image(file_path):
-    import pygame
-    image = pygame.image.load(file_path)
-    return image.convert_alpha()
+class Direction(Enum):
+    UP = 1
+    DOWN = 2
+    LEFT = 3
+    RIGHT = 4
