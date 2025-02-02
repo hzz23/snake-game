@@ -1,6 +1,4 @@
-以下是文件 `/snake-game/snake-game/src/main.py` 的内容：
-
-import pygame
+import pygame  
 from game import Game
 
 def main():
