@@ -1,25 +1,38 @@
+import pygame
+from snake import Snake
+from food import Food
+
 class Game:
     def __init__(self):
-        self.snake = None
-        self.food = None
-        self.score = 0
-        self.is_running = True
+        self.screen = pygame.display.set_mode((600, 400))
+        pygame.display.set_caption("贪吃蛇大战")
+        self.clock = pygame.time.Clock()
+        self.snake = Snake()
+        self.food = Food()
+        self.running = True
 
     def run(self):
-        while self.is_running:
-            self.handle_input()
+        while self.running:
+            self.handle_events()
             self.update()
             self.draw()
-            self.check_collision()
+            self.clock.tick(10)
 
-    def handle_input(self):
-        pass  # 处理用户输入
+    def handle_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+            elif event.type == pygame.KEYDOWN:
+                self.snake.change_direction(event.key)
 
     def update(self):
-        pass  # 更新游戏状态
+        self.snake.move()
+        if self.snake.check_collision(self.food.position):
+            self.snake.grow()
+            self.food.reposition()
 
     def draw(self):
-        pass  # 绘制游戏元素
-
-    def check_collision(self):
-        pass  # 检查碰撞
+        self.screen.fill((0, 0, 0))
+        self.snake.draw(self.screen)
+        self.food.draw(self.screen)
+        pygame.display.flip()
